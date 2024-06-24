@@ -15,11 +15,7 @@ function App() {
     <>
      <ThemeProvider theme={theme}>
      <Header />
-     <Container>
-        <Box my={2}>
-          
-        </Box>
-      </Container>
+     Hello
       </ThemeProvider>
     </>
   )

@@ -1,15 +1,47 @@
 
-import { Direction, Transitions, createMuiTheme } from "@material-ui/core/styles";
+import { Direction, Transitions, createMuiTheme, createTheme } from "@material-ui/core/styles";
 import { Breakpoints } from "@material-ui/core/styles/createBreakpoints";
 import { Mixins } from "@material-ui/core/styles/createMixins";
 import { Palette } from "@material-ui/core/styles/createPalette";
 import { Spacing } from "@material-ui/core/styles/createSpacing";
-import { Typography } from "@material-ui/core/styles/createTypography";
+import { Typography, TypographyOptions } from "@material-ui/core/styles/createTypography";
 import { Overrides } from "@material-ui/core/styles/overrides";
 import { ComponentsProps } from "@material-ui/core/styles/props";
 import { Shadows } from "@material-ui/core/styles/shadows";
 import { Shape } from "@material-ui/core/styles/shape";
 import { ZIndex } from "@material-ui/core/styles/zIndex";
+
+declare module '@material-ui/core/styles/createTypography' {
+	interface Typography {
+		tab: {
+		  fontFamily: string;
+		  textTransform: string;
+		  fontWeight: number;
+		  fontSize: string;
+		},
+		estimate: {
+			fontFamily: string;
+			fontSize: string;
+			textTransform: string;
+			color: string;
+		}
+	  }
+
+	  interface TypographyOptions {
+		tab?: {
+		  fontFamily: string;
+		  textTransform: string;
+		  fontWeight: number;
+		  fontSize: string;
+		},
+		estimate: {
+			fontFamily: string;
+			fontSize: string;
+			textTransform: string;
+			color: string;
+		}
+	  }
+}
 
 export interface Theme {
 	shape: Shape;
@@ -29,7 +61,8 @@ export interface Theme {
 
 const arcBlue = '#0B72B9';
 const arcOrange = '#FFBA60';
-export default createMuiTheme({
+
+const theme  = createTheme({ 
 	palette: {
 		common: { 
 			// blue: `${arcBlue}`,
@@ -43,8 +76,20 @@ export default createMuiTheme({
 		}	
 	},
 	typography: {
-		h3: {
-			fontWeight: 300
+		tab: {
+			fontFamily: 'Raleway',
+			textTransform: 'none',
+			fontWeight: 700,
+			fontSize: '1rem'
+		},
+		estimate : {
+			fontFamily: 'Pacifio',
+			fontSize: '1rem',
+			textTransform: 'none',
+			color: 'white'
 		}
 	}
+
 });
+
+export default theme;
