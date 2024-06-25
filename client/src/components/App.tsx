@@ -1,22 +1,40 @@
-import { useState } from 'react'
-import { Box, Button, Container } from '@material-ui/core'
+
 import Header from './ui/Header'
-import { ThemeProvider, createTheme } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/core'
 import theme from './ui/Theme'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-// const theme = createTheme({ 
 
-// })
+function Home() {
+  return <h1>Home</h1>;
+}
+
+function About() {
+  return <h1>About</h1>;
+}
+
+function Contact() {
+  return <h1>Contact</h1>;
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-     <ThemeProvider theme={theme}>
-     <Header />
-     Hello
-      </ThemeProvider>
+      <ThemeProvider theme={theme}>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<About />} />
+          <Route path="/customsoftware" element={<Home />} />
+          <Route path="/mobileapps" element={<Home />} />
+          <Route path="/websites" element={<Home />} />
+          <Route path="/revolution" element={<Home />} />
+          <Route path="/about" element={<Home />} />
+          <Route path="/estimate" element={<Home />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
     </>
   )
 }
