@@ -4,7 +4,7 @@ import { Breakpoints } from "@material-ui/core/styles/createBreakpoints";
 import { Mixins } from "@material-ui/core/styles/createMixins";
 import { Palette } from "@material-ui/core/styles/createPalette";
 import { Spacing } from "@material-ui/core/styles/createSpacing";
-import { Typography, TypographyOptions } from "@material-ui/core/styles/createTypography";
+import { Typography } from "@material-ui/core/styles/createTypography";
 import { Overrides } from "@material-ui/core/styles/overrides";
 import { ComponentsProps } from "@material-ui/core/styles/props";
 import { Shadows } from "@material-ui/core/styles/shadows";
