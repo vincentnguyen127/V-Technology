@@ -1,17 +1,30 @@
 import React, {FC, useEffect, useState} from 'react';
-import { AppBar, Toolbar, useScrollTrigger, Tabs, Tab, Button, Menu, MenuItem  } from '@material-ui/core';
+import { AppBar, Toolbar, useScrollTrigger, Tabs, Tab, Button, Menu, MenuItem, useTheme, useMediaQuery  } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import logo from '../../assets/logo.svg'
 import { Link } from 'react-router-dom';
+import { Height } from '@material-ui/icons';
 
 
 const useStyles = makeStyles( (theme : any)  => ({ 
 	toolbarMargin: {
 		...theme.mixins.toolbar,
-		marginBottom: '3em'
+		marginBottom: '3em',
+		[theme.breakpoints.down('md')]: { 
+			marginBottom: '2em'
+		},
+		[theme.breakpoints.down('xs')]: { 
+			marginBottom: '1.25em'
+		}
 	},
 	logo: {
-		height: '8em'
+		height: '8em',
+		[theme.breakpoints.down('md')]: { 
+			height: '7em'
+		},
+		[theme.breakpoints.down('xs')]: { 
+			height: '5.5em'
+		}
 	},
 	tabContainer: {
 		marginLeft: 'auto'
@@ -87,6 +100,8 @@ const Header : FC<HeaderProps> = ({ }) => {
 	const [anchorEl, setAnchorEL] = useState(null)
 	const [open, setOpen] = useState<boolean>(false)
 	const [selectedIndex, setSelectedIndex] = useState<number>(0)
+	const theme = useTheme()
+	const matches = useMediaQuery(theme.breakpoints.down('md'))
 
 	const handleClick = (e: any) => {
 		setAnchorEL(e.currentTarget)
@@ -198,35 +213,14 @@ const Header : FC<HeaderProps> = ({ }) => {
 			default:
 				break;			 
 		}
-		// if(pathName === '/' && tabValue !== 0 ) {
-		// 	setTabValue(0)
-		// }
-		// else if (pathName === '/services' && tabValue !== 1) {
-		// 	setTabValue(1)
-		// }
-		// else if (pathName === '/revolution' && tabValue !==2) {
-		// 	setTabValue(2)
-		// }
-		// else if (pathName === '/about' && tabValue !==3) {
-		// 	setTabValue(3)
-		// }
-		// else if (pathName === '/contact' && tabValue !==4) {
-		// 	setTabValue(4)
-		// }
 	} 
 
 	useEffect(() => {
 		fixActiveTabRefresh()
 	},[tabValue])
 
-	return (
+	const tabsRender = (
 		<>
-		<ElevationScroll>
-		<AppBar >
-			<Toolbar disableGutters>
-				<Button disableRipple component={Link} to="/" className={classes.logoContainer} onClick={() => setTabValue(0)}>
-				<img src={logo} alt="company logo" className={classes.logo}/>
-				</Button>
 				<Tabs value={tabValue} className={classes.tabContainer} onChange={(e, index) => setTabValue(index)} indicatorColor='primary'>
 				{tabs.map((tab,index) => (
 					<Tab key={index} className={classes.tab} label={tab.label} component={Link} to={tab.path} onMouseOver={tab.handleClickEvent}/>
@@ -238,6 +232,18 @@ const Header : FC<HeaderProps> = ({ }) => {
 					<MenuItem key={index} classes={{root: classes.menuItem}} component={Link} to={option.link} onClick={(e) => {handleMenuItemClick(e,index); setTabValue(1);}} selected={index === selectedIndex && tabValue === 1}>{option.name}</MenuItem>
 				))}
 			</Menu>
+		</>
+	)
+
+	return (
+		<>
+		<ElevationScroll>
+		<AppBar >
+			<Toolbar disableGutters>
+			<Button disableRipple component={Link} to="/" className={classes.logoContainer} onClick={() => setTabValue(0)}>
+				<img src={logo} alt="company logo" className={classes.logo}/>
+				</Button>
+				{matches ? null : tabsRender}
 			</Toolbar>
 		</AppBar>	
 		</ElevationScroll>
