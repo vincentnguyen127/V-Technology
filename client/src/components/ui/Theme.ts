@@ -12,23 +12,8 @@ import { Shape } from "@material-ui/core/styles/shape";
 import { ZIndex } from "@material-ui/core/styles/zIndex";
 
 declare module '@material-ui/core/styles/createTypography' {
-	interface Typography {
-		tab: {
-		  fontFamily: string;
-		  textTransform: string;
-		  fontWeight: number;
-		  fontSize: string;
-		},
-		estimate: {
-			fontFamily: string;
-			fontSize: string;
-			textTransform: string;
-			color: string;
-		}
-	  }
-
 	  interface TypographyOptions {
-		tab?: {
+		tab: {
 		  fontFamily: string;
 		  textTransform: string;
 		  fontWeight: number;
@@ -64,10 +49,10 @@ const arcOrange = '#FFBA60';
 
 const theme  = createTheme({ 
 	palette: {
-		common: { 
-			// blue: `${arcBlue}`,
-			// orange: `${arcOrange}`
-		},
+		// common: { 
+		// 	blue: `${arcBlue}`,
+		// 	// orange: `${arcOrange}`
+		// },
 		primary: {
 			main: `${arcBlue}`,
 		},
@@ -89,7 +74,6 @@ const theme  = createTheme({
 			color: 'white'
 		}
 	}
-
 });
 
 export default theme;
