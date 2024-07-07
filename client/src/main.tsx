@@ -4,11 +4,9 @@ import App from './components/App.tsx'
 import './index.css'
 
 
-
-
 ReactDOM.render(
   <React.StrictMode>
-      <App />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 )

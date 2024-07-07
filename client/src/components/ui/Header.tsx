@@ -90,7 +90,10 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 
 interface HeaderProps {
-
+	tabValue: number,
+	setTabValue: (value: number) => void,
+	selectedIndex: number,
+	setSelectedIndex: (value: number) => void
 }
 
 interface TabType {
@@ -101,8 +104,8 @@ interface TabType {
 	selectedIndex?: number
 }
 
-interface MenuOptions extends TabType {
-	selectedIndex?: number
+export interface MenuOptions extends TabType {
+	selectedIndex: number
 }
 
 function ElevationScroll(props: any) {
@@ -118,12 +121,37 @@ function ElevationScroll(props: any) {
 	});
 }
 
-const Header: FC<HeaderProps> = ({ }) => {
+export const menuOptions: MenuOptions[] = [
+	{
+		name: 'Services',
+		link: '/services',
+		activeIndex: 1,
+		selectedIndex: 0
+	},
+	{
+		name: 'Custom Software Development',
+		link: '/customsoftware',
+		activeIndex: 1,
+		selectedIndex: 1
+	},
+	{
+		name: 'Mobile App Development',
+		link: '/mobileapps',
+		activeIndex: 1,
+		selectedIndex: 2
+	},
+	{
+		name: 'Website Development',
+		link: '/websites',
+		activeIndex: 1,
+		selectedIndex: 3
+	}
+]
+
+const Header: FC<HeaderProps> = ({ tabValue, setTabValue, selectedIndex, setSelectedIndex }) => {
 	const classes = useStyles();
-	const [tabValue, setTabValue] = useState<number>(0);
 	const [anchorEl, setAnchorEL] = useState(null)
 	const [openMenu, setOpenMenu] = useState<boolean>(false)
-	const [selectedIndex, setSelectedIndex] = useState<number>(0)
 	const [openDrawer, setOpenDrawer] = useState<boolean>(false)
 	const theme = useTheme()
 	const matches = useMediaQuery(theme.breakpoints.down('md'))
@@ -172,85 +200,6 @@ const Header: FC<HeaderProps> = ({ }) => {
 			activeIndex: 4
 		},
 	]
-
-	const menuOptions: MenuOptions[] = [
-		{
-			name: 'Services',
-			link: '/services',
-			activeIndex: 1,
-			selectedIndex: 0
-		},
-		{
-			name: 'Custom Software Development',
-			link: '/customsoftware',
-			activeIndex: 1,
-			selectedIndex: 1
-		},
-		{
-			name: 'Mobile App Development',
-			link: '/mobileapps',
-			activeIndex: 1,
-			selectedIndex: 2
-		},
-		{
-			name: 'Website Development',
-			link: '/websites',
-			activeIndex: 1,
-			selectedIndex: 3
-		}
-	]
-
-	const fixActiveTabRefresh = () => {
-		const pathName = window.location.pathname
-		switch (pathName) {
-			case '/':
-				if (tabValue !== 0) {
-					setTabValue(() => 0)
-				}
-				break;
-			case '/services':
-				if (tabValue !== 1) {
-					setTabValue(() => 1)
-					setSelectedIndex(() => 0)
-				}
-				break;
-			case '/customsoftware':
-				if (tabValue !== 1) {
-					setTabValue(() => 1)
-					setSelectedIndex(() => 1)
-				}
-				break;
-			case '/mobileapps':
-				if (tabValue !== 1) {
-					setTabValue(() => 1)
-					setSelectedIndex(() => 2)
-				}
-				break;
-			case '/websites':
-				if (tabValue !== 1) {
-					setTabValue(() => 1)
-					setSelectedIndex(() => 3)
-				}
-				break;
-			case '/revolution':
-				if (tabValue !== 2) {
-					setTabValue(() => 2)
-				}
-				break;
-			case '/about':
-				if (tabValue !== 3) {
-					setTabValue(() => 3)
-				}
-				break;
-			case '/contact':
-				if (tabValue !== 4) {
-					setTabValue(() => 4)
-				}
-				break;
-			default:
-				break;
-		}
-	}
 
 	useEffect(() => {
 		// fixActiveTabRefresh()
