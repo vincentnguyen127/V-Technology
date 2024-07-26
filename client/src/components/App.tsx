@@ -5,6 +5,7 @@ import theme from './ui/Theme'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Footer from './ui/Footer';
 import { useState } from 'react';
+import LandingPage from './LandngPage';
 
 
 function Home() {
@@ -49,7 +50,7 @@ function App() {
         <Router>
           <Header tabValue={tabValue} setTabValue={setTabValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path="/services" element={<Services />} />
             <Route path="/customsoftware" element={<CustomerServices />} />
             <Route path="/mobileapps" element={<MobileApps />} />

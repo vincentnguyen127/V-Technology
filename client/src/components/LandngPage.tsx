@@ -1,0 +1,136 @@
+import Lottie from 'react-lottie'
+//@ts-ignore
+import animationData from '../animations/landinganimation/data'
+import { Button, Grid, Theme, Typography, makeStyles, useTheme } from '@material-ui/core'
+import { FC } from 'react'
+import customSoftwareIcon from '../assets/Custom Software Icon.svg'
+
+const useStyles = makeStyles((theme: any) => ({
+	animation: {
+		maxWidth: '50em',
+		minWidth: '21em',
+		marginTop: '2em',
+		marginLeft: '10%',
+		[theme.breakpoints.down('sm')]: {
+			maxWidth: '30em'
+		}
+	},
+	estimateButton: {
+		...theme.typography.estimate,
+		backgroundColor: theme.palette.secondary.main,
+		borderRadius: 50,
+		height: 45,
+		width: 145,
+		marginRight: 40,
+		padding: 5,
+		"&:hover": {
+			backgroundColor: theme.palette.secondary.light
+		}
+	},
+	buttonContainer: {
+		marginTop: '1em'
+	},
+	learnButtonHero: {
+		borderColor: theme.palette.primary.main,
+		color: theme.palette.primary.main,
+		borderWidth: 2,
+		textTransform: 'none',
+		borderRadius: 50,
+		fontFamily: 'Roboto',
+		fontWeight: 'bold',
+		fontSize: '0.9rem',
+		height: 45,
+		padding: 5,
+		width: 145
+	},
+	mainContainer: {
+		marginTop: '5em',
+		[theme.breakpoints.down('md')]: {
+			marginTop: '3em'
+		},
+		[theme.breakpoints.down('xs')]: {
+			marginTop: '2em'
+		}
+	},
+	heroTextContainer: {
+		minWidth: '21em',
+		marginLeft: '1em',
+		[theme.breakpoints.down('xs')]: {
+			marginLeft: '0'
+		}
+	}
+}))
+
+interface LandingPageProps {
+
+}
+
+const LandingPage: FC<LandingPageProps> = () => {
+	const classes = useStyles()
+	const theme = useTheme()
+
+	const defaultOptions = {
+		loop: true,
+		autoplay: true,
+		animationData: animationData,
+		rendererSettings: {
+			preserveAspectRatio: 'xMidYMid slice'
+		}
+	};
+
+
+	return (
+		<>
+			<Grid container direction='column' justifyContent='center' className={classes.mainContainer}>
+				<Grid item> {/*-----Hero Block------*/}
+					<Grid container justifyContent='flex-end' alignItems='center'>
+						<Grid item sm className={classes.heroTextContainer}>
+							<Typography variant='h2' align='center'>Bringing West Coast Technology<br />to the Midwest</Typography>
+							<Grid container justifyContent='center' alignItems='center' className={classes.buttonContainer}>
+								<Grid item>
+									<Button variant='contained' className={classes.estimateButton}>
+										FREE ESTIMATE
+									</Button>
+								</Grid>
+								<Grid item>
+									<Button variant='outlined' className={classes.learnButtonHero}>
+										LEARN MORE
+									</Button>
+								</Grid>
+							</Grid>
+						</Grid>
+						<Grid item sm className={classes.animation}>
+							<Lottie options={defaultOptions} height={'100%'} width={'100%'} />
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item> {/*-----Services Block------*/}
+					<Grid container>
+						<Grid item>
+							<Typography variant='h4'>
+								Custom Software Development
+							</Typography>
+							<Typography variant='subtitle1'>
+								Save Energey. Save Time. Save Money.
+							</Typography>
+							<Typography variant='subtitle2'>
+								Complete ditital solutions, from investigation to <span>celebration</span>
+							</Typography>
+							<Button variant='outlined' className={classes.learnButtonHero}>
+								Learn More
+							</Button>
+						</Grid>
+						<Grid item>
+							<img alt='custom software icon' src={customSoftwareIcon} />
+						</Grid>
+					</Grid>
+
+
+
+				</Grid>
+			</Grid>
+		</>
+	)
+}
+
+export default LandingPage
