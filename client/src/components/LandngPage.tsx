@@ -1,9 +1,10 @@
 import Lottie from 'react-lottie'
 //@ts-ignore
 import animationData from '../animations/landinganimation/data'
-import { Button, Grid, Theme, Typography, makeStyles, useTheme } from '@material-ui/core'
+import { Button, Grid, Typography, makeStyles, useTheme, useMediaQuery } from '@material-ui/core'
 import { FC } from 'react'
 import customSoftwareIcon from '../assets/Custom Software Icon.svg'
+import mobileAppsIcon from '../assets/mobileIcon.svg'
 
 const useStyles = makeStyles((theme: any) => ({
 	animation: {
@@ -41,7 +42,10 @@ const useStyles = makeStyles((theme: any) => ({
 		fontSize: '0.9rem',
 		height: 45,
 		padding: 5,
-		width: 145
+		width: 145,
+		[theme.breakpoints.down('sm')]: {
+			marginBottom: '2em'
+		}
 	},
 	mainContainer: {
 		marginTop: '5em',
@@ -58,6 +62,16 @@ const useStyles = makeStyles((theme: any) => ({
 		[theme.breakpoints.down('xs')]: {
 			marginLeft: '0'
 		}
+	},
+	icon: {
+		marginLeft: '2em',
+		[theme.breakpoints.down('xs')]: {
+			marginLeft: 0
+		}
+	},
+	serviceContainer: {
+		marginTop: '12em',
+
 	}
 }))
 
@@ -68,6 +82,7 @@ interface LandingPageProps {
 const LandingPage: FC<LandingPageProps> = () => {
 	const classes = useStyles()
 	const theme = useTheme()
+	const matchesSM = useMediaQuery(theme.breakpoints.down("sm"))
 
 	const defaultOptions = {
 		loop: true,
@@ -105,28 +120,46 @@ const LandingPage: FC<LandingPageProps> = () => {
 					</Grid>
 				</Grid>
 				<Grid item> {/*-----Services Block------*/}
-					<Grid container>
-						<Grid item>
+					<Grid container className={classes.serviceContainer} justifyContent={matchesSM ? 'center' : undefined}>
+						<Grid item style={{ marginLeft: matchesSM ? 0 : '5em', textAlign: matchesSM ? 'center' : undefined }}>
 							<Typography variant='h4'>
 								Custom Software Development
 							</Typography>
-							<Typography variant='subtitle1'>
+							<Typography variant='subtitle1' style={{ marginBottom: '1rem' }}>
 								Save Energey. Save Time. Save Money.
 							</Typography>
 							<Typography variant='subtitle2'>
-								Complete ditital solutions, from investigation to <span>celebration</span>
+								Complete ditital solutions, from investigation to <span style={{ fontFamily: 'Pacifico', color: theme.palette.secondary.main }}>celebration</span>
 							</Typography>
 							<Button variant='outlined' className={classes.learnButtonHero}>
 								Learn More
 							</Button>
 						</Grid>
 						<Grid item>
-							<img alt='custom software icon' src={customSoftwareIcon} />
+							<img className={classes.icon} alt='custom software icon' src={customSoftwareIcon} />
 						</Grid>
 					</Grid>
-
-
-
+				</Grid>
+				<Grid item> {/*-----iOS/Android Block------*/}
+					<Grid container className={classes.serviceContainer} justifyContent={matchesSM ? 'center' : 'flex-end'}>
+						<Grid item style={{ textAlign: matchesSM ? 'center' : undefined }}>
+							<Typography variant='h4'>
+								iOS/Android App Development
+							</Typography>
+							<Typography variant='subtitle1' style={{ marginBottom: '1rem' }}>
+								Extend Functionality. Extend Access. Increase Engagement.
+							</Typography>
+							<Typography variant='subtitle1'>
+								Integrate your web experience or create a standalone
+							</Typography>
+							<Button variant='outlined' className={classes.learnButtonHero}>
+								Learn More
+							</Button>
+						</Grid>
+						<Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
+							<img className={classes.icon} alt='mobile phone icon' src={mobileAppsIcon} />
+						</Grid>
+					</Grid>
 				</Grid>
 			</Grid>
 		</>

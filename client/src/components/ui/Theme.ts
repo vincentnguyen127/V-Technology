@@ -46,6 +46,7 @@ export interface Theme {
 
 const arcBlue = '#0B72B9';
 const arcOrange = '#FFBA60';
+const arcGrey = '$8686'
 
 const theme  = createTheme({ 
 	palette: {
@@ -79,7 +80,29 @@ const theme  = createTheme({
 			fontSize: '2.5rem',
 			color: `${arcBlue}`,
 			lineHeight: 1.5
+		},
+		h3: {
+			fontFamily: 'Pacifico',
+			fontSize: '2.5rem',
+			color: `${arcBlue}`,
+		},
+		h4: {
+			fontFamily: 'Raleway',
+			fontSize: '1.75rem',
+			color: `${arcBlue}`,
+			fontWeight: 700
+		},
+		subtitle1: {
+			fontSize: '1.25rem',
+			fontWeight: 300,
+			color: `${arcGrey}`
+		},
+		subtitle2: {
+			fontSize: '1.25rem',
+			fontWeight: 100,
+			color: `${arcGrey}`
 		}
+
 	}
 });
 
