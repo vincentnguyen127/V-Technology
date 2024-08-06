@@ -1,10 +1,12 @@
 import Lottie from 'react-lottie'
 //@ts-ignore
 import animationData from '../animations/landinganimation/data'
-import { Button, Grid, Typography, makeStyles, useTheme, useMediaQuery } from '@material-ui/core'
+import { Button, Grid, Typography, makeStyles, useTheme, useMediaQuery, Card, CardContent, CardActions } from '@material-ui/core'
 import { FC } from 'react'
 import customSoftwareIcon from '../assets/Custom Software Icon.svg'
 import mobileAppsIcon from '../assets/mobileIcon.svg'
+import websitesIcon from '../assets/websiteIcon.svg'
+import revolutionBackground from '../assets/repeatingBackground.svg'
 
 const useStyles = makeStyles((theme: any) => ({
 	animation: {
@@ -72,6 +74,25 @@ const useStyles = makeStyles((theme: any) => ({
 	serviceContainer: {
 		marginTop: '12em',
 
+	},
+	revolutionBackground: {
+		backgroundImage: `url(${revolutionBackground})`,
+		backgroundPosition: 'center',
+		backgroundSize: 'cover',
+		backgroundRepeat: 'no-repeat',
+		height: '100%',
+		width: '100%'
+	},
+	revolutionCard: {
+		position: 'absolute',
+		boxShadow: theme.shadows[10],
+		borderRadius: 15,
+		padding: '10em',
+		[theme.breakpoints.down('sm')]: {
+			padding: '8em 0',
+			borderRadius: 0,
+			width: '100%'
+		}
 	}
 }))
 
@@ -159,6 +180,49 @@ const LandingPage: FC<LandingPageProps> = () => {
 						<Grid item style={{ marginRight: matchesSM ? 0 : '5em' }}>
 							<img className={classes.icon} alt='mobile phone icon' src={mobileAppsIcon} />
 						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item> {/*-----Websites Block------*/}
+					<Grid container className={classes.serviceContainer} justifyContent={matchesSM ? 'center' : undefined}>
+						<Grid item style={{ marginLeft: matchesSM ? 0 : '5em', textAlign: matchesSM ? 'center' : undefined }}>
+							<Typography variant='h4'>
+								Website Development
+							</Typography>
+							<Typography variant='subtitle1' style={{ marginBottom: '1rem' }}>
+								Reach More. Discover More. Sell More.
+							</Typography>
+							<Typography variant='subtitle2'>
+								Optimized for Search, built for speed
+							</Typography>
+							<Button variant='outlined' className={classes.learnButtonHero}>
+								Learn More
+							</Button>
+						</Grid>
+						<Grid item>
+							<img className={classes.icon} alt='custom software icon' src={websitesIcon} />
+						</Grid>
+					</Grid>
+				</Grid>
+				<Grid item>
+					<Grid container style={{ height: '100em', marginTop: '12em' }} alignItems='center' justifyContent='center'>
+						<Card className={classes.revolutionCard}>
+							<CardContent>
+								<Grid container direction='column' alignItems='center'>
+									<Grid item>
+										<Typography variant='h3' gutterBottom> The Revolution</Typography>
+									</Grid>
+									<Grid item>
+										<Typography variant='subtitle1' style={{ textAlign: 'center' }}>
+											Visonary ingishts coupled with cutting-edge technology is a recipe for revolution
+										</Typography>
+									</Grid>
+									<Button variant='outlined' className={classes.learnButtonHero}>
+										Learn More
+									</Button>
+								</Grid>
+							</CardContent>
+						</Card>
+						<div className={classes.revolutionBackground} />
 					</Grid>
 				</Grid>
 			</Grid>
